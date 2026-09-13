@@ -87,10 +87,10 @@
         vkBridge.send('VKWebAppInit');
 
         function setStatus(text) {
-            // Пока мы показываем уведомление на экране, чтобы вы проверили тексты
-            alert("Ваш статус будет звучать так:\n\n" + text);
-            
-            // Вскоре мы добавим сюда магию отправки статуса напрямую в ваш профиль VK
+            // Отправка запроса на установку статуса в профиль VK
+            vkBridge.send('VKWebAppSetActivityStatus', {
+                'text': text
+            });
         }
     </script>
 </body>
