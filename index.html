@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Статус с хорьком</title>
+  <!-- Подключение официальной библиотеки VK Bridge -->
+  <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/index.umd.js"></script>
+</head>
+<body style="display:flex; justify-content:center; align-items:center; height:100vh; margin:0; background:#19191a; color:white; font-family:sans-serif;">
+
+  <button id="setStatusBtn" style="padding:15px 30px; font-size:16px; font-weight:bold; border-radius:10px; border:none; background:#2688eb; color:white; cursor:pointer;">
+    Установить статус с хорьком
+  </button>
+
+  <script>
+    // Инициализация приложения ВК
+    vkBridge.send('VKWebAppInit');
+
+    // Нажатие на кнопку
+    document.getElementById('setStatusBtn').addEventListener('click', () => {
+      vkBridge.send('VKWebAppSetEmojiStatus', {
+        id: 1 // Замените цифру 1 на ID вашего эмодзи из панели разработчика VK
+      })
+      .then((data) => {
+        if (data.result) {
+          alert('Статус с хорьком успешно установлен!');
+        }
+      })
+      .catch((error) => {
+        console.error('Ошибка при установке статуса:', error);
+      });
+    });
+  </script>
+</body>
+</html>
