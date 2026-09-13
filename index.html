@@ -1,36 +1,97 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Статус с хорьком</title>
-  <!-- Подключение официальной библиотеки VK Bridge -->
-  <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/index.umd.js"></script>
-</head>
-<body style="display:flex; justify-content:center; align-items:center; height:100vh; margin:0; background:#19191a; color:white; font-family:sans-serif;">
-
-  <button id="setStatusBtn" style="padding:15px 30px; font-size:16px; font-weight:bold; border-radius:10px; border:none; background:#2688eb; color:white; cursor:pointer;">
-    Установить статус с хорьком
-  </button>
-
-  <script>
-    // Инициализация приложения ВК
-    vkBridge.send('VKWebAppInit');
-
-    // Нажатие на кнопку
-    document.getElementById('setStatusBtn').addEventListener('click', () => {
-      vkBridge.send('VKWebAppSetEmojiStatus', {
-        id: 1 // Замените цифру 1 на ID вашего эмодзи из панели разработчика VK
-      })
-      .then((data) => {
-        if (data.result) {
-          alert('Статус с хорьком успешно установлен!');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши Статусы</title>
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #1a1a1a;
+            color: #f0e6d2;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
         }
-      })
-      .catch((error) => {
-        console.error('Ошибка при установке статуса:', error);
-      });
-    });
-  </script>
+        h1 {
+            font-size: 22px;
+            color: #d4af37;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px black;
+        }
+        .ferret-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        .ferret-card {
+            background: #2a2a2a;
+            border: 2px solid #d4af37;
+            border-radius: 20px;
+            padding: 15px;
+            width: 90%;
+            max-width: 320px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .ferret-card:hover {
+            transform: scale(1.03);
+        }
+        .ferret-image {
+            width: 100%;
+            border-radius: 15px;
+        }
+        .ferret-btn {
+            margin-top: 15px;
+            padding: 12px 20px;
+            background-color: #8b0000;
+            color: #f0e6d2;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Georgia', serif;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Символы нашего союза</h1>
+
+    <div class="ferret-container">
+        <!-- Черный хорек (Послание для Марии) -->
+        <div class="ferret-card" onclick="setStatus('Мое сердце навеки в твоих руках, моя несравненная Морозова Мария Евгениевна де Мухина. Люблю тебя безмерно, mon ange.')">
+            <img src="1000101948_2.png" alt="Черный хорек" class="ferret-image">
+            <button class="ferret-btn">Статус для Марии</button>
+        </div>
+
+        <!-- Белый хорек (Послание для Алена) -->
+        <div class="ferret-card" onclick="setStatus('Мое сердце навеки в твоих руках, мой несравненный Морозов Ален Александрович де Шеремет. Люблю тебя безмерно, mon amour.')">
+            <img src="1000101947_2.png" alt="Белый хорек" class="ferret-image">
+            <button class="ferret-btn">Статус для Алена</button>
+        </div>
+
+        <!-- Разноцветный хорек (Единый союз) -->
+        <div class="ferret-card" onclick="setStatus('Союз, в котором слились Морозов Ален Александрович де Шеремет и Морозова Мария Евгениевна де Мухина, нерушим, и мы едины вовек. Pour l\'éternité.')">
+            <img src="1000101946_2.png" alt="Разноцветный хорек" class="ferret-image">
+            <button class="ferret-btn">Наш общий статус</button>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация моста с ВКонтакте
+        vkBridge.send('VKWebAppInit');
+
+        function setStatus(text) {
+            // Пока мы показываем уведомление на экране, чтобы вы проверили тексты
+            alert("Ваш статус будет звучать так:\n\n" + text);
+            
+            // Вскоре мы добавим сюда магию отправки статуса напрямую в ваш профиль VK
+        }
+    </script>
 </body>
 </html>
